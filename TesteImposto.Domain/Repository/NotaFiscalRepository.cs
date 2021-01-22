@@ -32,7 +32,9 @@ namespace TesteImposto.Domain.Data
             _sqlCommand.Parameters.Add(AddParameter("@pEstadoOrigem", nfe.EstadoOrigem, DbType.String));
             _sqlCommand.Parameters.Add(AddParameter("@pEstadoDestino", nfe.EstadoDestino, DbType.String));
 
-            var idNotaFiscal = (int)_sqlCommand.ExecuteScalar();
+            _sqlCommand.ExecuteNonQuery();
+
+            var idNotaFiscal = Convert.ToInt32(_sqlCommand.Parameters["@pId"].Value);
 
             // Adiciona itens da nota
             foreach (var item in nfe.ItensDaNotaFiscal) AdicionarNotaFiscalItem(idNotaFiscal, item);

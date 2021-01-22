@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TesteImposto.Domain.Util;
 
 namespace TesteImposto.Domain.Model
 {
@@ -39,7 +40,7 @@ namespace TesteImposto.Domain.Model
                 mensagemValidacao = "O estado origem é obrigatório.";
                 return false;
             }
-            else if (EstadoOrigem.Length > 2)
+            else if (EstadoOrigem.Length > 2 || !EstadosDisponiveis.ListaDeEstadosDeOrigem.Contains(EstadoOrigem))
             {
                 mensagemValidacao = "Selecione um estado de origem.";
                 return false;
@@ -50,7 +51,7 @@ namespace TesteImposto.Domain.Model
                 mensagemValidacao = "O estado destino é obrigatório.";
                 return false;
             }
-            else if (EstadoDestino.Length > 2)
+            else if (EstadoDestino.Length > 2 || !EstadosDisponiveis.ListaDeEstadosDeDestino.Contains(EstadoDestino))
             {
                 mensagemValidacao = "Selecione um estado de destino.";
                 return false;
