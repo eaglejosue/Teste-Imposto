@@ -49,6 +49,8 @@ BEGIN
 			@pCodigoProduto)
 
 		SET @pId = @@IDENTITY
+		
+		SELECT @pId as 'Id'
 	END
 	ELSE
 	BEGIN
@@ -61,7 +63,9 @@ BEGIN
 			,[ValorIcms] = @pValorIcms
 			,[NomeProduto] = @pNomeProduto
 			,[CodigoProduto] = @pCodigoProduto
-		 WHERE Id = @pId
+		WHERE Id = @pId
+
+		SELECT @pId as 'Id';
 	END	    
 END
 GO

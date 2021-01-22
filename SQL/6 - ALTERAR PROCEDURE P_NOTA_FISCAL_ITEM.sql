@@ -50,6 +50,8 @@ BEGIN
 			@pDesconto)
 
 		SET @pId = @@IDENTITY
+
+		SELECT @pId as 'Id'
 	END
 	ELSE
 	BEGIN
@@ -66,7 +68,9 @@ BEGIN
 			,[AliquotaIpi] = @pAliquotaIpi
 			,[ValorIpi] = @pValorIpi
 			,[Desconto] = @pDesconto
-		 WHERE Id = @pId
+		WHERE Id = @pId
+
+		SELECT @pId as 'Id'
 	END	    
 END
 GO
