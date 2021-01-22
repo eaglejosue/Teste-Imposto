@@ -49,7 +49,7 @@ BEGIN
 			@pCodigoProduto)
 
 		SET @pId = @@IDENTITY
-		RETURN
+		RETURN @pId
 	END
 	ELSE
 	BEGIN
@@ -63,7 +63,7 @@ BEGIN
 			,[NomeProduto] = @pNomeProduto
 			,[CodigoProduto] = @pCodigoProduto
 		WHERE Id = @pId
-		RETURN
+		RETURN @pId
 	END	    
 END
 GO

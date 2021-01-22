@@ -40,7 +40,7 @@ BEGIN
            ,@pEstadoOrigem)
 
 		SET @pId = @@IDENTITY
-		RETURN
+		SELECT @pId as 'ID'
 	END
 	ELSE
 	BEGIN
@@ -51,7 +51,7 @@ BEGIN
 		  ,[EstadoDestino] = @pEstadoDestino
 		  ,[EstadoOrigem] = @pEstadoOrigem
 		WHERE Id = @pId
-		RETURN
+		SELECT @pId as 'ID'
 	END	    
 END
 GO

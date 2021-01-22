@@ -50,7 +50,7 @@ BEGIN
 			@pDesconto)
 
 		SET @pId = @@IDENTITY
-		RETURN
+		RETURN @pId
 	END
 	ELSE
 	BEGIN
@@ -68,7 +68,7 @@ BEGIN
 			,[ValorIpi] = @pValorIpi
 			,[Desconto] = @pDesconto
 		WHERE Id = @pId
-		RETURN
+		RETURN @pId
 	END	    
 END
 GO
