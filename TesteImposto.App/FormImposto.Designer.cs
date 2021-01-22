@@ -72,7 +72,7 @@
             this.textBoxNomeCliente.Location = new System.Drawing.Point(95, 20);
             this.textBoxNomeCliente.Name = "textBoxNomeCliente";
             this.textBoxNomeCliente.Size = new System.Drawing.Size(476, 20);
-            this.textBoxNomeCliente.TabIndex = 3;
+            this.textBoxNomeCliente.TabIndex = 1;
             // 
             // label4
             // 
@@ -90,7 +90,7 @@
             this.dataGridViewPedidos.Location = new System.Drawing.Point(6, 82);
             this.dataGridViewPedidos.Name = "dataGridViewPedidos";
             this.dataGridViewPedidos.Size = new System.Drawing.Size(1028, 344);
-            this.dataGridViewPedidos.TabIndex = 7;
+            this.dataGridViewPedidos.TabIndex = 4;
             this.dataGridViewPedidos.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DataGridViewPedidos_EditingControlShowing);
             // 
             // buttonGerarNotaFiscal
@@ -98,7 +98,7 @@
             this.buttonGerarNotaFiscal.Location = new System.Drawing.Point(907, 440);
             this.buttonGerarNotaFiscal.Name = "buttonGerarNotaFiscal";
             this.buttonGerarNotaFiscal.Size = new System.Drawing.Size(127, 23);
-            this.buttonGerarNotaFiscal.TabIndex = 8;
+            this.buttonGerarNotaFiscal.TabIndex = 5;
             this.buttonGerarNotaFiscal.Text = "Gerar Nota Fiscal";
             this.buttonGerarNotaFiscal.UseVisualStyleBackColor = true;
             this.buttonGerarNotaFiscal.Click += new System.EventHandler(this.ButtonGerarNotaFiscal_Click);
@@ -109,7 +109,7 @@
             this.comboBoxEstadoOrigem.Location = new System.Drawing.Point(671, 20);
             this.comboBoxEstadoOrigem.Name = "comboBoxEstadoOrigem";
             this.comboBoxEstadoOrigem.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxEstadoOrigem.TabIndex = 9;
+            this.comboBoxEstadoOrigem.TabIndex = 2;
             // 
             // comboBoxEstadoDestino
             // 
@@ -117,7 +117,7 @@
             this.comboBoxEstadoDestino.Location = new System.Drawing.Point(907, 20);
             this.comboBoxEstadoDestino.Name = "comboBoxEstadoDestino";
             this.comboBoxEstadoDestino.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxEstadoDestino.TabIndex = 10;
+            this.comboBoxEstadoDestino.TabIndex = 3;
             // 
             // FormImposto
             // 

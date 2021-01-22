@@ -25,12 +25,17 @@ namespace TesteImposto.Domain.Service
                 var notaFiscal = new NotaFiscal();
                 notaFiscal.EmitirNotaFiscal(pedido);
 
-                var urlArquivoXml = $"{ConfigurationManager.AppSettings["UrlArquivo"]}/{notaFiscal.Serie}_{DateTime.Now:ddMMyyyyHHmmss}.xml";
+                // Verifica se diretório existe
+                var urlDiretorioArquivosXml = ConfigurationManager.AppSettings["UrlArquivo"];
+                if (!Directory.Exists(urlDiretorioArquivosXml)) Directory.CreateDirectory(urlDiretorioArquivosXml);
+
+                var urlArquivoXml = $"{urlDiretorioArquivosXml}/{notaFiscal.Serie}_{DateTime.Now:ddMMyyyyHHmmss}.xml";
                 GerarXmlNotaFiscal(notaFiscal, urlArquivoXml);
 
+                // Verifica se arquivo existe
                 if (!File.Exists(urlArquivoXml)) return false;
 
-                // Exercício 2
+                // Exercício 2 - persiste dados no SQL
                 _notaFiscalRepository.AdicionarNotaFiscal(notaFiscal);
 
                 return true;
@@ -40,10 +45,6 @@ namespace TesteImposto.Domain.Service
                 //Registrar log
                 var erro = ex.Message;
                 return false;
-            }
-            finally
-            {
-                if (_notaFiscalRepository != null) _notaFiscalRepository.Dispose();
             }
         }
 
