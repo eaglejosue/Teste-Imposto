@@ -96,7 +96,7 @@ namespace TesteImposto.Test
             
             var primeiroItemDaNota = notaFiscal.ItensDaNotaFiscal.FirstOrDefault();
 
-            Assert.AreNotEqual("60", primeiroItemDaNota.TipoIcms);
+            Assert.AreNotEqual("10", primeiroItemDaNota.TipoIcms);
         }
 
         [TestMethod]

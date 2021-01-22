@@ -50,7 +50,7 @@ namespace TesteImposto.Domain.Model
                 mensagemValidacao = "O estado destino é obrigatório.";
                 return false;
             }
-            else if (EstadoOrigem.Length > 2)
+            else if (EstadoDestino.Length > 2)
             {
                 mensagemValidacao = "Selecione um estado de destino.";
                 return false;
@@ -70,7 +70,7 @@ namespace TesteImposto.Domain.Model
                     return false;
                 }
 
-                if (item.ValorItemPedido >= decimal.Zero)
+                if (item.ValorItemPedido == decimal.Zero)
                 {
                     mensagemValidacao = $"O campo valor do item {item.NomeProduto} deve conter um valor maior que zero.";
                     return false;
