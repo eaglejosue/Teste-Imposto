@@ -1,0 +1,44 @@
+-- Exercício 4
+
+USE [Teste]
+GO
+
+IF OBJECT_ID('dbo.P_RETORNA_CFOP_ICMS_IPI') IS NOT NULL
+BEGIN
+    DROP PROCEDURE dbo.P_RETORNA_CFOP_ICMS_IPI
+    IF OBJECT_ID('dbo.P_RETORNA_CFOP_ICMS_IPI') IS NOT NULL
+        PRINT '<<< FALHA APAGANDO A PROCEDURE dbo.P_RETORNA_CFOP_ICMS_IPI >>>'
+    ELSE
+        PRINT '<<< PROCEDURE dbo.P_RETORNA_CFOP_ICMS_IPI APAGADA >>>'
+END
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+SET NOCOUNT ON 
+GO 
+
+CREATE PROCEDURE P_RETORNA_CFOP_ICMS_IPI
+AS
+BEGIN
+	BEGIN 		
+		SELECT
+             Cfop as "CFOP"
+            ,SUM(BaseIcms) as "Valor Total da Base de ICMS"
+            ,SUM(ValorIcms) as "Valor Total do ICMS"
+            ,SUM(BaseIpi) as "Valor Total da Base de IPI"
+            ,SUM(ValorIpi) as "Valor Total do IPI"
+        FROM [NotaFiscalItem]
+        GROUP BY Cfop
+	END    
+END
+GO
+
+GRANT EXECUTE ON dbo.P_RETORNA_CFOP_ICMS_IPI TO [public]
+GO
+
+IF OBJECT_ID('dbo.P_RETORNA_CFOP_ICMS_IPI') IS NOT NULL
+    PRINT '<<< PROCEDURE dbo.P_RETORNA_CFOP_ICMS_IPI CRIADA >>>'
+ELSE
+    PRINT '<<< FALHA NA CRIACAO DA PROCEDURE dbo.P_RETORNA_CFOP_ICMS_IPI >>>'
+go
