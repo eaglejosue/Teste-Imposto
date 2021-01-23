@@ -21,54 +21,52 @@ ALTER PROCEDURE [dbo].[P_NOTA_FISCAL_ITEM]
 AS
 BEGIN
 	IF (@pId = 0)
-	BEGIN 		
-		INSERT INTO [dbo].[NotaFiscalItem]
-           ([IdNotaFiscal]
-           ,[Cfop]
-           ,[TipoIcms]
-           ,[BaseIcms]
-           ,[AliquotaIcms]
-           ,[ValorIcms]
-           ,[NomeProduto]
-           ,[CodigoProduto]
-           ,[BaseIpi]
-           ,[AliquotaIpi]
-           ,[ValorIpi]
-           ,[Desconto])
-		VALUES
-           (@pIdNotaFiscal,
-			@pCfop,
-			@pTipoIcms,
-			@pBaseIcms,
-			@pAliquotaIcms,
-			@pValorIcms,
-			@pNomeProduto,
-			@pCodigoProduto,
-			@pBaseIpi,
-			@pAliquotaIpi,
-			@pValorIpi,
-			@pDesconto)
+		BEGIN 		
+			INSERT INTO [dbo].[NotaFiscalItem]
+    	       ([IdNotaFiscal]
+    	       ,[Cfop]
+    	       ,[TipoIcms]
+    	       ,[BaseIcms]
+    	       ,[AliquotaIcms]
+    	       ,[ValorIcms]
+    	       ,[NomeProduto]
+    	       ,[CodigoProduto]
+    	       ,[BaseIpi]
+    	       ,[AliquotaIpi]
+    	       ,[ValorIpi]
+    	       ,[Desconto])
+			VALUES
+    	       (@pIdNotaFiscal,
+				@pCfop,
+				@pTipoIcms,
+				@pBaseIcms,
+				@pAliquotaIcms,
+				@pValorIcms,
+				@pNomeProduto,
+				@pCodigoProduto,
+				@pBaseIpi,
+				@pAliquotaIpi,
+				@pValorIpi,
+				@pDesconto)
 
-		SET @pId = @@IDENTITY
-		RETURN @pId
-	END
+			SET @pId = @@IDENTITY
+		END
 	ELSE
-	BEGIN
-		UPDATE [dbo].[NotaFiscalItem]
-		SET [IdNotaFiscal] = @pIdNotaFiscal
-			,[Cfop] = @pCfop
-			,[TipoIcms] = @pTipoIcms
-			,[BaseIcms] = @pBaseIcms
-			,[AliquotaIcms] = @pAliquotaIcms
-			,[ValorIcms] = @pValorIcms
-			,[NomeProduto] = @pNomeProduto
-			,[CodigoProduto] = @pCodigoProduto
-			,[BaseIpi] = @pBaseIpi
-			,[AliquotaIpi] = @pAliquotaIpi
-			,[ValorIpi] = @pValorIpi
-			,[Desconto] = @pDesconto
-		WHERE Id = @pId
-		RETURN @pId
-	END	    
+		BEGIN
+			UPDATE [dbo].[NotaFiscalItem]
+			SET [IdNotaFiscal] = @pIdNotaFiscal
+				,[Cfop] = @pCfop
+				,[TipoIcms] = @pTipoIcms
+				,[BaseIcms] = @pBaseIcms
+				,[AliquotaIcms] = @pAliquotaIcms
+				,[ValorIcms] = @pValorIcms
+				,[NomeProduto] = @pNomeProduto
+				,[CodigoProduto] = @pCodigoProduto
+				,[BaseIpi] = @pBaseIpi
+				,[AliquotaIpi] = @pAliquotaIpi
+				,[ValorIpi] = @pValorIpi
+				,[Desconto] = @pDesconto
+			WHERE Id = @pId
+		END	    
 END
 GO

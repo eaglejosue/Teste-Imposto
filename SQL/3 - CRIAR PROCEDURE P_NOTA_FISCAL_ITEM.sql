@@ -28,43 +28,41 @@ CREATE PROCEDURE P_NOTA_FISCAL_ITEM
 AS
 BEGIN
 	IF (@pId = 0)
-	BEGIN 		
-		INSERT INTO [dbo].[NotaFiscalItem]
-           ([IdNotaFiscal]
-           ,[Cfop]
-           ,[TipoIcms]
-           ,[BaseIcms]
-           ,[AliquotaIcms]
-           ,[ValorIcms]
-           ,[NomeProduto]
-           ,[CodigoProduto])
-		VALUES
-           (@pIdNotaFiscal,
-			@pCfop,
-			@pTipoIcms,
-			@pBaseIcms,
-			@pAliquotaIcms,
-			@pValorIcms,
-			@pNomeProduto,
-			@pCodigoProduto)
+		BEGIN 		
+			INSERT INTO [dbo].[NotaFiscalItem]
+    	       ([IdNotaFiscal]
+    	       ,[Cfop]
+    	       ,[TipoIcms]
+    	       ,[BaseIcms]
+    	       ,[AliquotaIcms]
+    	       ,[ValorIcms]
+    	       ,[NomeProduto]
+    	       ,[CodigoProduto])
+			VALUES
+    	       (@pIdNotaFiscal,
+				@pCfop,
+				@pTipoIcms,
+				@pBaseIcms,
+				@pAliquotaIcms,
+				@pValorIcms,
+				@pNomeProduto,
+				@pCodigoProduto)
 
-		SET @pId = @@IDENTITY
-		RETURN @pId
-	END
+			SET @pId = @@IDENTITY
+		END
 	ELSE
-	BEGIN
-		UPDATE [dbo].[NotaFiscalItem]
-		SET [IdNotaFiscal] = @pIdNotaFiscal
-			,[Cfop] = @pCfop
-			,[TipoIcms] = @pTipoIcms
-			,[BaseIcms] = @pBaseIcms
-			,[AliquotaIcms] = @pAliquotaIcms
-			,[ValorIcms] = @pValorIcms
-			,[NomeProduto] = @pNomeProduto
-			,[CodigoProduto] = @pCodigoProduto
-		WHERE Id = @pId
-		RETURN @pId
-	END	    
+		BEGIN
+			UPDATE [dbo].[NotaFiscalItem]
+			SET [IdNotaFiscal] = @pIdNotaFiscal
+				,[Cfop] = @pCfop
+				,[TipoIcms] = @pTipoIcms
+				,[BaseIcms] = @pBaseIcms
+				,[AliquotaIcms] = @pAliquotaIcms
+				,[ValorIcms] = @pValorIcms
+				,[NomeProduto] = @pNomeProduto
+				,[CodigoProduto] = @pCodigoProduto
+			WHERE Id = @pId
+		END	    
 END
 GO
 GRANT EXECUTE ON dbo.P_NOTA_FISCAL_ITEM TO [public]

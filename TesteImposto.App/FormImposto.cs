@@ -59,7 +59,7 @@ namespace TesteImposto
                 }
                 else
                 {
-                    MessageBox.Show("Ocorreram erros ao gerar o XML da nfe!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ocorreram erros ao gerar a nota fiscal!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -105,6 +105,8 @@ namespace TesteImposto
             comboBoxEstadoDestino.Text = "Selecione";
 
             InicializarGridView();
+
+            textBoxNomeCliente.Focus();
         }
 
         private void DataGridViewPedidos_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)

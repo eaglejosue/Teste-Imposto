@@ -42,9 +42,7 @@ namespace TesteImposto.Domain.Service
             }
             catch (Exception ex)
             {
-                //Registrar log
-                var erro = ex.Message;
-                return false;
+                throw ex;
             }
         }
 

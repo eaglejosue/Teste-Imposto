@@ -8,14 +8,15 @@ BEGIN
     ELSE
         PRINT '<<< PROCEDURE dbo.P_NOTA_FISCAL APAGADA >>>'
 END
-go
+GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET NOCOUNT ON 
-GO 
+GO
+
 CREATE PROCEDURE dbo.P_NOTA_FISCAL 
 (
-	@pId int OUTPUT,
+	@pId int,
 	@pNumeroNotaFiscal int,
 	@pSerie int,
 	@pNomeCliente varchar(50),
@@ -25,42 +26,44 @@ CREATE PROCEDURE dbo.P_NOTA_FISCAL
 AS
 BEGIN
 	IF (@pId = 0)
-	BEGIN 
-		INSERT INTO [dbo].[NotaFiscal]
-           ([NumeroNotaFiscal]
-           ,[Serie]
-           ,[NomeCliente]
-           ,[EstadoDestino]
-           ,[EstadoOrigem])
-		VALUES
-           (@pNumeroNotaFiscal
-           ,@pSerie
-           ,@pNomeCliente
-           ,@pEstadoDestino
-           ,@pEstadoOrigem)
+		BEGIN 
+			INSERT INTO [dbo].[NotaFiscal]
+    	       ([NumeroNotaFiscal]
+    	       ,[Serie]
+    	       ,[NomeCliente]
+    	       ,[EstadoOrigem]
+    	       ,[EstadoDestino])
+			VALUES
+    	       (@pNumeroNotaFiscal
+    	       ,@pSerie
+    	       ,@pNomeCliente
+    	       ,@pEstadoOrigem
+    	       ,@pEstadoDestino)
 
-		SET @pId = @@IDENTITY
-		SELECT @pId as 'ID'
-	END
+			SET @pId = @@IDENTITY
+			SELECT @pId as 'Id'
+		END
 	ELSE
-	BEGIN
-		UPDATE [dbo].[NotaFiscal]
-		SET [NumeroNotaFiscal] = @pNumeroNotaFiscal
-		  ,[Serie] = @pSerie
-		  ,[NomeCliente] = @pNomeCliente
-		  ,[EstadoDestino] = @pEstadoDestino
-		  ,[EstadoOrigem] = @pEstadoOrigem
-		WHERE Id = @pId
-		SELECT @pId as 'ID'
-	END	    
+		BEGIN
+			UPDATE [dbo].[NotaFiscal]
+			SET [NumeroNotaFiscal] = @pNumeroNotaFiscal
+			  ,[Serie] = @pSerie
+			  ,[NomeCliente] = @pNomeCliente
+			  ,[EstadoOrigem] = @pEstadoOrigem
+			  ,[EstadoDestino] = @pEstadoDestino
+			WHERE Id = @pId
+
+			SELECT @pId as 'Id'
+		END	    
 END
 GO
+
 GRANT EXECUTE ON dbo.P_NOTA_FISCAL TO [public]
-go
+GO
 IF OBJECT_ID('dbo.P_NOTA_FISCAL') IS NOT NULL
     PRINT '<<< PROCEDURE dbo.P_NOTA_FISCAL CRIADA >>>'
 ELSE
     PRINT '<<< FALHA NA CRIACAO DA PROCEDURE dbo.P_NOTA_FISCAL >>>'
-go
+GO
 
 

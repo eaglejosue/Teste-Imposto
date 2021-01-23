@@ -9,36 +9,41 @@ namespace TesteImposto.Domain.Data
     public class NotaFiscalRepository : IDisposable
     {
         private readonly SqlConnection _sqlConnection;
-        private readonly SqlCommand _sqlCommand;
+        private SqlCommand _sqlCommand;
 
         public NotaFiscalRepository()
         {
             _sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConn"].ConnectionString);
-            _sqlConnection.Open();
-            _sqlCommand = new SqlCommand { Connection = _sqlConnection };
         }
 
         public void AdicionarNotaFiscal(NotaFiscal nfe)
         {
-            // Adiciona nota
-            _sqlCommand.CommandText = "P_NOTA_FISCAL";
-            _sqlCommand.CommandType = CommandType.StoredProcedure;
+            _sqlCommand = new SqlCommand("P_NOTA_FISCAL", _sqlConnection) { CommandType = CommandType.StoredProcedure };
 
+            // Adiciona nota
             _sqlCommand.Parameters.Clear();
-            _sqlCommand.Parameters.Add(AddParameter("@pId", 0, DbType.Int32, ParameterDirection.Output));
+            _sqlCommand.Parameters.Add(AddParameter("@pId", 0, DbType.Int32));
             _sqlCommand.Parameters.Add(AddParameter("@pNumeroNotaFiscal", nfe.NumeroNotaFiscal, DbType.Int32));
             _sqlCommand.Parameters.Add(AddParameter("@pSerie", nfe.Serie, DbType.Int32));
             _sqlCommand.Parameters.Add(AddParameter("@pNomeCliente", nfe.NomeCliente, DbType.String));
             _sqlCommand.Parameters.Add(AddParameter("@pEstadoOrigem", nfe.EstadoOrigem, DbType.String));
             _sqlCommand.Parameters.Add(AddParameter("@pEstadoDestino", nfe.EstadoDestino, DbType.String));
 
-            var resultado = _sqlCommand.ExecuteScalar();
-            var idNotaFiscal = resultado != null ? Convert.ToInt32(resultado) : 0;
+            _sqlConnection.Open();
 
+            var idNotaFiscal = 0;
+            
+            using (var reader = _sqlCommand.ExecuteReader(CommandBehavior.CloseConnection))
+                while (reader.Read()) idNotaFiscal = reader.GetInt32(0);
+            
             if (idNotaFiscal == 0) throw new Exception("Erro ao inserir nota");
+
+            if (_sqlConnection.State == ConnectionState.Closed) _sqlConnection.Open();
 
             // Adiciona itens da nota
             foreach (var item in nfe.ItensDaNotaFiscal) AdicionarNotaFiscalItem(idNotaFiscal, item);
+
+            _sqlConnection.Close();
         }
 
         private void AdicionarNotaFiscalItem(int idNotaFiscal, NotaFiscalItem item)
@@ -47,7 +52,7 @@ namespace TesteImposto.Domain.Data
             _sqlCommand.CommandType = CommandType.StoredProcedure;
 
             _sqlCommand.Parameters.Clear();
-            _sqlCommand.Parameters.Add(AddParameter("@pId", 0, DbType.Int32, ParameterDirection.Output));
+            _sqlCommand.Parameters.Add(AddParameter("@pId", 0, DbType.Int32));
             _sqlCommand.Parameters.Add(AddParameter("@pIdNotaFiscal", idNotaFiscal, DbType.Int32));
             _sqlCommand.Parameters.Add(AddParameter("@pCfop", item.Cfop, DbType.String));
             _sqlCommand.Parameters.Add(AddParameter("@pTipoIcms", item.TipoIcms, DbType.String));
